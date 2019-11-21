@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+	<head>
+		<meta charset="utf-8">
+		<title>D3:SVG:Demo</title>
+		<link rel="stylesheet" type="text/css" href="./css/jquery-contextmenu-2.9.0/jquery.contextMenu.css">
+		<link rel="stylesheet" type="text/css" href="./css/index.css">
+		<script type="text/javascript" src="./lib/jquery-1.12.3/jquery.js"></script>
+		<script type="text/javascript" src="./lib/jquery-contextmenu-2.9.0/jquery.contextMenu.js"></script>
+		<script type="text/javascript" src="./lib/jquery-contextmenu-2.9.0/jquery.ui.position.js"></script>
+		<script type="text/javascript" src="./lib/d3_v5.14.1/d3.js"></script>
+		<script type="text/javascript" src="./js/DrawDataObj.js"></script>
+		<script type="text/javascript" src="./js/EleMentZoom.js"></script>
+		<script type="text/javascript" src="./js/DrawUtils.js"></script>
+		<script type="text/javascript" src="./js/index.js"></script>
+	</head>
+	<body>
+		<header class="container no-skin">
+			<nav class="nav box border_box_size box_horizontal box_center">
+				<ul class="nav_ul box box_horizontal box_center">
+					<li><a href="#">首页</a></li>
+					<li><a href="#">热点</a></li>
+					<li><a href="#">要闻</a></li>
+					<li><a href="#">更多</a></li>
+					<li><a href="#">注册</a></li>
+					<li><a id="to_login" href="#">登录</a></li>
+					<li><a href="#">关于我们</a></li>
+				</ul>
+			</nav>
+		</header>
+		<section id="main_container" class="container no-skin">
+			<div class="block">
+				<section class="selectTitle">
+					
+				</section>
+				<section id="menuBar" class="menuBar">
+					<input type="checkbox" name="deleteEle" id="deleteEle" value="1"/>擦除
+					<button class="button-info" name="selectSimpleShape" id="selectSimpleShape">选择的图形</button>
+					<button class="button-info" name="drawGraghShape" id="drawGraghShape">已画的图形</button>
+				</section>
+			</div>
+			<section class="main_content box border_box_size box_horizontal">
+				<aside class="aside">
+					
+				</aside>
+				<article class="article">
+					<div id="graphMenu" class="divGraphMenu"></div>
+					<div id="drawMainDiv" class="drawContent">
+						<button class="button-info">重置</button>
+					</div>
+				</article>
+			</section>
+		</section>
+		<footer class="container">
+		
+		</footer>
+		
+		<div id="login_shadow_layer" class="shadow_layer hidden">
+			<div id="login_div" class="login_form_container hidden">
+				<div class="login_input_outline">
+					<div class="login_input"><div class="login_title"><span>登录系统</span></div></div>
+					<div class="login_input">
+						<div class="label"><label class="label">账&nbsp;&nbsp;&nbsp;号</label></div><input class="input" type="text" name="account" id="account">
+					</div>
+					<div class="login_input">
+						<div class="label"><label class="label">密&nbsp;&nbsp;&nbsp;码</label></div><input class="input" type="password" name="psw" id="psw">
+					</div>
+					<div class="login_input">
+						<div class="label"><label>验证码</label></div><input class="input" type="text" name="checkCode" id="checkCode">
+					</div>
+					<div class="login_input"><div id="to_login_close" class="login_btn"><span>取消<span></div><div class="login_btn"><span>登录<span></div></div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		window.onload=_IndexPage.pageOnLoad;
+	</script>
+</html>

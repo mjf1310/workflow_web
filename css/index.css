@@ -1,0 +1,399 @@
+@charset "utf-8";
+
+/** svg css start **/
+svg {
+  cursor: default;
+  display: block;
+  margin: auto;
+  border: 1px solid black;
+}
+
+.edge {
+  stroke: #888;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+.edge:hover {
+  stroke: #333;
+  stroke-width: 3px;
+}
+
+.edge.same-color {
+  stroke: #ff4444;
+}
+
+.vertex {
+  cursor: pointer;
+}
+
+.vertex:hover {
+  stroke: #333;
+  opacity: 0.8;
+}
+
+
+/** svg css end **/
+
+
+/** left section display css **/
+.text-center{
+	text-align:center;
+}
+.box{
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+
+.border_box_size{
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.content_box_size{
+	-moz-box-sizing: content-box;
+	-o-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.box_horizontal{
+	-moz-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
+	box-orient: horizontal;
+}
+.box_vertical{
+	-moz-box-orient: vertical;
+	-webkit-box-orient: vertical;
+	box-orient: vertical;
+}
+.box_center{
+	-webkit-box-align:center;
+	box-align:center;
+}
+
+.vertical_middle{
+	vertical-align:middle;
+}
+
+.block{
+	display:block;
+}
+
+.button-info{
+	display:inline-block;
+	width:auto;
+	height:30px;
+	background-color:#00CED1;
+	color:#FFFFFF;
+	border-style:double;
+	border-width:1px;
+	border-color:#20B2AA;
+	border-radius:5px;
+	cursor:pointer;
+	text-align:center;
+	padding:5px;
+}
+.button-success{
+	display:inline-block;
+	width:auto;
+	height:30px;
+	background-color:#00FF7F;
+	color:#FFFFFF;
+	border-style:double;
+	border-width:1px;
+	border-color:#00FA9A;
+	border-radius:5px;
+	cursor:pointer;
+	text-align:center;
+	padding:5px;
+}
+.show{
+	display: block;
+}
+.hidden{
+	display:none;
+}
+
+/** left section display css **/
+
+
+/* No style rules here yet */	
+.container{
+	position:relative;
+	display:block;
+	width:100%;
+	margin: 0;
+	padding: 1px;
+	text-align:center;
+	overflow: hidden;
+}
+
+.nav{
+	width:100%;
+	height:50px;
+	margin-top:0px;
+}
+
+.no-skin .nav{
+	background-color:#000000;
+}
+
+.nav .nav_ul{
+	width:100%;
+	list-style: none;
+	text-align:center;
+}
+
+.no-skin .nav .nav_ul{
+	color:#FFFFFF;
+}
+
+.nav .nav_ul li{
+	display:flex;
+	width:100px;
+	height:50px;
+	margin-left:10px;
+	margin-right:10px;
+	margin-top:-16px;
+	padding:0px;
+	text-align:center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.no-skin .nav .nav_ul li:hover{
+	background-color:#2d2a2a;
+	border-style:dashed;
+	border-width:1px;
+	border-color:#FFFFFF;
+}
+
+.nav .nav_ul li a{
+	display:flex;
+	text-decoration:none;
+	width:100%;
+	/**height:100%;**/
+	justify-content: center;
+	margin-top:16px;
+}
+
+.no-skin .nav .nav_ul li a{
+	color:#FFFFFF;
+}
+
+.main_content{
+	width:100%;
+	height:100%;
+}
+.selectTitle{
+	display:inline-block;
+	width:180px;
+	height:30px;
+	text-align:center;
+	padding:0px;
+	background-color:#00FF7F;
+	border-style:double;
+	border-width:1px;
+	border-color:#00FA9A;
+	border-radius:5px;
+}
+.menuBar{
+	display:inline-block;
+	width: -moz-calc(100% - 190px);
+    width: -webkit-calc(100% - 190px);
+	height:30px;
+	text-align:left;
+	padding:0px;
+}
+
+.no-skin .aside{
+	background-color:#000000;
+}
+
+.aside{
+	display:flex;
+	width:180px;
+	min-height:843px;
+	max-height:100%;
+	height:100%;
+}
+
+.article{
+	display:flex;
+	width: -moz-calc(100% - 180px);
+    width: -webkit-calc(100% - 180px);
+	height:100%;
+}
+
+
+.divGraphMenu {
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+	width:110px;
+	min-height:800px;
+	max-height:100%;
+	vertical-align: top;
+	-moz-box-orient: vertical;
+	-webkit-box-orient: vertical;
+	box-orient: vertical;
+}
+div[id$=drawMainDiv]{
+	position:relative;
+	display:flex;
+    width: -moz-calc(100% - 110px);
+    width: -webkit-calc(100% - 110px);
+	min-height:840px;
+	max-height:100%;
+	background-color:#00ffdb1a;
+	vertical-align: top;
+}
+
+.divGraphMenu div {
+	display:inline-block;
+}
+.selectClass {
+	background-color:#cc4829c7;
+}
+
+.divGraphMenu svg line{
+	stroke: grey;
+	stroke-width: 2;
+}
+
+.divGraphMenu svg circle{
+	stroke: red;
+	fill: none;
+	stroke-width: 2;
+}
+
+.divGraphMenu svg rect{
+	stroke: steelblue;
+	fill: none;
+	stroke-width: 2;
+}
+
+.divGraphMenu svg polygon{
+	stroke: green;
+	fill: none;
+	stroke-width: 2;
+}
+
+div[id$=drawMainDiv] .axis path {
+  display: none;
+}
+
+div[id$=drawMainDiv] .axis line {
+  stroke-opacity: 0.3;
+  shape-rendering: crispEdges;
+}
+
+div[id$=drawMainDiv] .view {
+  fill: url(#gradient);
+  stroke: #000;
+}
+
+div[id$=drawMainDiv] button {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+.shadow_layer{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#708090;
+	top:0px;
+	left:0px;
+	opacity:0.5;
+	filter:Alpha(opacity=50)
+	z-index:1000;
+}
+
+.login_form_container{
+	position:absolute;
+	/**margin: 15% auto 15% auto;**/
+	padding: -15px;
+	width: 70%;
+	text-align:center;
+	top:15%;
+	left:15%;
+	z-index:1003;
+}
+
+.login_input_outline{
+	width: 350px;
+	margin: auto;
+	background-color:#FFFFFF;
+	text-align:center;
+	border: 1px dotted #99b1ee;
+	border-radius: 5px;
+	z-index:1003;
+}
+
+.login_input{
+	width: 350px;
+	height:60px;
+	text-align:center;
+	padding: 0px 0px;
+	z-index:1003;
+}
+
+.login_title{
+	display:inline-block;
+	width: 300px;
+	height:20px;
+	text-align:center;
+	padding: 15px 15px;
+	background-color: #99b1ee;
+	color: #ffffff;
+	border-radius: 2px;
+}
+
+.login_btn{
+	display:inline-block;
+	width: 110px;
+	height:20px;
+	text-align:center;
+	background-color: #99ee9e;
+	padding: 15px 15px;
+	cursor:pointer;
+	color: #ffffff;
+	border-radius: 10px;
+}
+
+.login_form_container .login_input .label{
+	width:80px;
+	height:50px;
+	display:inline-block;
+}
+
+.login_form_container .login_input .input{
+	width:250px;
+	height:30px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+   .login_form_container{
+		margin: 10% auto 10% auto;
+		padding: -15px;
+		width: 80%;
+		text-align:center;
+	}
+}
+
+

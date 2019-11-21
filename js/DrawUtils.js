@@ -313,10 +313,6 @@ var DrawUtils = function(){
 		if (d3.event.button != 0 && d3.event.buttons!=1){
 			return false;
 		}
-		/**
-		 * mouseup事件失效的解决方案
-		 */
-		_this.d3PauseEvent(e);
 		
 		/**var self = $(e.currentTarget);**/
 		var self = d3.select(d3.event.currentTarget);

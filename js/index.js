@@ -211,6 +211,9 @@ var IndexPage = function(){
 	
 	_this.drawBgMouseUp = function(drawBgEleId){
 		var event = d3.select("#"+drawBgEleId).on("mouseup",function(e){
+			if (d3.event.button != 0 && d3.event.buttons!=1){
+				return false;
+			}
 			var e1 = d3.event;
 			var x = e1.offsetX;
 			var y = e1.offsetY;

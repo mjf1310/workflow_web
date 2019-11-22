@@ -434,6 +434,188 @@ var DrawUtils = function(){
 		}
 	};
 	
+	_this.graphMouseDown_jquery = function(e){
+		if (e.button != 0 && e.buttons!=1){
+			return false;
+		}
+		
+		/**
+		 * mouseup事件失效的解决方案
+		 */
+		_this.pauseEvent(e);
+		
+		var drawId = _this.param.drawId;
+		var self = $(e.currentTarget);
+		/**var self = d3.select(d3.event.currentTarget);**/
+		var id = self.attr("id");
+		if(drawId && drawId.length>0){
+			var offsetX = e.offsetX;
+			var offsetY = e.offsetY;
+			var x = e.pageX;
+			var y = e.pageY;
+			/**var e1 = d3.event;
+			var offsetX = e1.offsetX;
+			var offsetY = e1.offsetY;
+			var x = e1.x;
+			var y = e1.y;**/
+			var drawDataObj;
+			if('arrow'==drawId){
+				drawDataObj  = _DrawDataObjFactory.createDrawDataObj("arrow",x,y,x+50,y+45,0,w,h,x+50,y+10,x+50,y+80);
+			}else if('horitionalArrow'==drawId){
+				drawDataObj  = _DrawDataObjFactory.createDrawDataObj("horitionalArrow",x,y,x+50,y+45,0,w,h,x+50,y+10,x+85,y+85);
+			}else if('verticalArrow'==drawId){
+				drawDataObj  = _DrawDataObjFactory.createDrawDataObj("verticalArrow",x,y,x+50,y+45,0,w,h,x+50,y+10,x+85,y+80);
+			}else{
+				return;
+			}
+			
+			var drawDataObjVal = _DrawDataObjFactory.getDrawDataObjById(id);
+			if(drawDataObjVal && typeof(drawDataObjVal)=="object"){
+				drawDataObj.preId = drawDataObjVal.id;
+				drawDataObj.preObj = drawDataObjVal;
+				
+				drawDataObjVal.nextId = drawDataObj.id;
+				drawDataObjVal.nextObj = drawDataObj;
+				_this.edge.prefObj = drawDataObjVal;
+			}
+			_this.edge.drawDataObj = drawDataObj;
+			_this.edge.currentObj = drawDataObj;
+			_this.edge.pathData = [];
+			var data = [];
+			data.push(x);
+			data.push(y);
+			_this.edge.pathData.push(data);
+			var path = d3.path();
+		    path.moveTo(x,y);
+			_this.edge.path = path;
+		}
+	};
+	
+	_this.graphMouseUp_jquery = function(e){debugger;
+		if (e.button != 0 && e.buttons!=1){
+			return false;
+		}
+		
+		var self = $(e.currentTarget);
+		/**var self = d3.select(d3.event.currentTarget);**/
+		var id = self.attr("id");
+		var drawId = _this.param.drawId;
+		if(drawId && drawId.length>0){
+			var svg = d3.select("#drawMainDiv svg[id=draw_bg_svg]");
+			if('arrow'==drawId){
+				var g = svg.append("g");
+				var pathObj = g.append("path");
+				_this.edge.path.closePath();
+				pathObj.attr("id",_this.edge.drawDataObj.id)
+					   .attr("name",_this.edge.drawDataObj.name)
+					   .attr("d", _this.edge.path)
+					   .attr("fill","none")
+					   .attr("stroke","#00FF00")
+					   .attr("stroke-width",3)
+					   //.call(_this.addZoomTransform())
+					   .call(_this.dragPath());
+				pathObj.on("mousedown",function(e){
+					_this.addClick(e);
+				});
+				
+				_this.edge.drawDataObj.path = _this.edge.path;
+				var drawDataObjVal = _DrawDataObjFactory.getDrawDataObjById(id);
+				if(drawDataObjVal && typeof(drawDataObjVal)=="object"){
+					_DrawDataObjFactory.updateDrawDataObj(_this.edge.prefObj);
+				    _DrawDataObjFactory.updateDataNode(_this.edge.prefObj);
+					
+					_this.edge.nextObj = drawDataObjVal;
+					_this.edge.drawDataObj.nextId = drawDataObjVal.id;
+					_this.edge.drawDataObj.nextObj = drawDataObjVal;
+					_DrawDataObjFactory.updateDrawDataObj(_this.edge.drawDataObj);
+					
+					drawDataObjVal.preId = _this.edge.drawDataObj.id;
+					drawDataObjVal.preObj = _this.edge.drawDataObj;
+					_DrawDataObjFactory.updateDrawDataObj(drawDataObjVal);
+					_DrawDataObjFactory.updateDataNode(drawDataObjVal);
+				}
+				
+				_DrawDataObjFactory.saveDataLine(_this.edge.drawDataObj);
+				//pathObj.call(_this.addZoomTransform());
+				return g.node();
+			}
+			if('horitionalArrow'==drawId){
+				var g = svg.append("g");
+				var pathObj = g.append("path");
+				_this.edge.path.closePath();
+				pathObj.attr("id",_this.edge.drawDataObj.id)
+					   .attr("name",_this.edge.drawDataObj.name)
+					   .attr("d", _this.edge.path)
+					   .attr("fill","none")
+					   .attr("stroke","#00FF00")
+					   .attr("stroke-width",3)
+					   //.call(_this.addZoomTransform())
+					   .call(_this.dragPath());
+				pathObj.on("mousedown",function(e){
+					_this.addClick(e);
+				});
+				
+				var drawDataObjVal = _DrawDataObjFactory.getDrawDataObjById(id);
+				if(drawDataObjVal && typeof(drawDataObjVal)=="object"){
+					_DrawDataObjFactory.updateDrawDataObj(_this.edge.prefObj);
+				    _DrawDataObjFactory.updateDataNode(_this.edge.prefObj);
+					
+					_this.edge.nextObj = drawDataObjVal;
+					_this.edge.drawDataObj.nextId = drawDataObjVal.id;
+					_this.edge.drawDataObj.nextObj = drawDataObjVal;
+					_DrawDataObjFactory.updateDrawDataObj(_this.edge.drawDataObj);
+					
+					drawDataObjVal.preId = _this.edge.drawDataObj.id;
+					drawDataObjVal.preObj = _this.edge.drawDataObj;
+					_DrawDataObjFactory.updateDrawDataObj(drawDataObjVal);
+					_DrawDataObjFactory.updateDataNode(drawDataObjVal);
+				}
+				
+				_this.edge.drawDataObj.path = _this.edge.path;
+				_DrawDataObjFactory.saveDataLine(_this.edge.drawDataObj);
+				//pathObj.call(_this.addZoomTransform());
+				return g.node();
+			}
+			if('verticalArrow'==drawId){
+				var g = svg.append("g");
+				var pathObj = g.append("path");
+				_this.edge.path.closePath();
+				pathObj.attr("id",_this.edge.drawDataObj.id)
+					   .attr("name",_this.edge.drawDataObj.name)
+					   .attr("d", _this.edge.path)
+					   .attr("fill","none")
+					   .attr("stroke","#00FF00")
+					   .attr("stroke-width",3)
+					   //.call(_this.addZoomTransform())
+					   .call(_this.dragPath());
+				pathObj.on("mousedown",function(e){
+					_this.addClick(e);
+				});
+				
+				var drawDataObjVal = _DrawDataObjFactory.getDrawDataObjById(id);
+				if(drawDataObjVal && typeof(drawDataObjVal)=="object"){
+					_DrawDataObjFactory.updateDrawDataObj(_this.edge.prefObj);
+				    _DrawDataObjFactory.updateDataNode(_this.edge.prefObj);
+					
+					_this.edge.nextObj = drawDataObjVal;
+					_this.edge.drawDataObj.nextId = drawDataObjVal.id;
+					_this.edge.drawDataObj.nextObj = drawDataObjVal;
+					_DrawDataObjFactory.updateDrawDataObj(_this.edge.drawDataObj);
+					
+					drawDataObjVal.preId = _this.edge.drawDataObj.id;
+					drawDataObjVal.preObj = _this.edge.drawDataObj;
+					_DrawDataObjFactory.updateDrawDataObj(drawDataObjVal);
+					_DrawDataObjFactory.updateDataNode(drawDataObjVal);
+				}
+				
+				_this.edge.drawDataObj.path = _this.edge.path;
+				_DrawDataObjFactory.saveDataLine(_this.edge.drawDataObj);
+				//pathObj.call(_this.addZoomTransform());
+				return g.node();
+			}
+		}
+	};
+	
 	_this.dynamicCreateContextMenu = function(eleMId){
 		if(eleMId && eleMId!="" && eleMId.length>0){
 			$.contextMenu({
@@ -464,6 +646,7 @@ var DrawUtils = function(){
 	
 	_this.onMouseEvent = function(eleMId){
 		if(eleMId && eleMId!="" && eleMId.length>0){
+			/**
 			$("#"+eleMId).on("mouseup",function(e){
 				_this.graphMouseUp(e);
 			});
@@ -472,6 +655,13 @@ var DrawUtils = function(){
 			});
 			$("#"+eleMId).on("mouseleave",function(e){
 				return _this.pauseEvent(e);
+			});**/
+			
+			$("#"+eleMId).mousedown(function(e){
+				_this.graphMouseDown_jquery(e);
+			});
+			$("#"+eleMId).mouseup(function(e){
+				_this.graphMouseUp_jquery(e);
 			});
 		}
 	};
@@ -499,14 +689,14 @@ var DrawUtils = function(){
 				.attr('stroke-width',1);
 				//.call(_this.addZoomTransform())
 				//.call(_this.dragCircle());
-		startObj.on("mouseup",function(e){
+		/**startObj.on("mouseup",function(e){
 			_this.graphMouseUp(e);
 		});
 		startObj.on("mousedown",function(e){
 			_this.graphMouseDown(e);
-		});
+		});**/
 		
-		/**_this.onMouseEvent(startDataObj.id);**/
+		_this.onMouseEvent(startDataObj.id);
 		/**
 		startObj.on("contextmenu",function(e){
 			_this.contextMenu(e);
@@ -566,14 +756,14 @@ var DrawUtils = function(){
 			.attr('stroke-width',1);
 			//.call(_this.addZoomTransform())
 			//.call(_this.dragCircle());
-		
+		/**
 		endObj1.on("mouseup",function(e){
 			_this.graphMouseUp(e);
 		});
 		endObj1.on("mousedown",function(e){
 			_this.graphMouseDown(e);
-		});
-		/**_this.onMouseEvent(endDataObj1.id);**/
+		});**/
+		_this.onMouseEvent(endDataObj1.id);
 		
 		//endObj1.call(_this.dragCircle());
 		/**endObj1.call(_this.addZoomTransform());**/
@@ -596,14 +786,14 @@ var DrawUtils = function(){
 			   .attr('stroke-width',1);
 			   //.call(_this.addZoomTransform())
 			   //.call(_this.dragCircle());
-		
+		/**
 		endObj2.on("mouseup",function(e){
 			_this.graphMouseUp(e);
 		});
 		endObj2.on("mousedown",function(e){
 			_this.graphMouseDown(e);
-		});
-		/**_this.onMouseEvent(endDataObj2.id);**/
+		});**/
+		_this.onMouseEvent(endDataObj2.id);
 		
 		//endObj2.call(_this.dragCircle());
 		/**endObj2.call(_this.addZoomTransform());**/
@@ -654,15 +844,15 @@ var DrawUtils = function(){
 			   .attr('stroke-width',1);
 		       //.call(_this.addZoomTransform())
 			   //.call(_this.dragRect());
-		
+		/**
 		rectObj.on("mouseup",function(e){
 			_this.graphMouseUp(e);
 		});
 		rectObj.on("mousedown",function(e){
 			_this.graphMouseDown(e);
-		});
+		});**/
 		
-		/**_this.onMouseEvent(rectDataObj.id);**/
+		_this.onMouseEvent(rectDataObj.id);
 		
 		//rectObj.call(_this.dragRect());
 		/**rectObj.call(_this.addZoomTransform());**/
@@ -704,15 +894,15 @@ var DrawUtils = function(){
 		       .attr("stroke-width",3);
 		       //.call(_this.addZoomTransform())
 		       //.call(_this.dragPath());
-		
+		/**
 		pathObj.on("mouseup",function(e){
 			_this.graphMouseUp(e);
 		});
 		pathObj.on("mousedown",function(e){
 			_this.graphMouseDown(e);
-		});
+		});**/
 		
-		/**_this.onMouseEvent(rectRotateDataObj.id);**/
+		_this.onMouseEvent(rectRotateDataObj.id);
 		
 		//pathObj.call(_this.dragPath());
 		/**pathObj.call(_this.addZoomTransform());**/
